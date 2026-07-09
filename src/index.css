@@ -1,0 +1,313 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Share+Tech+Mono&family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --bg-primary: #040406;
+  --bg-secondary: #0a0b12;
+  --bg-tertiary: #12131f;
+  --color-cyan: #00f0ff;
+  --color-magenta: #ff007f;
+  --color-green: #39ff14;
+  --color-yellow: #ffc800;
+  --color-text: #e2e8f0;
+  --color-text-dim: #94a3b8;
+  --border-cyber: #1e293b;
+  --cyber-glow-cyan: 0 0 10px rgba(0, 240, 255, 0.5), 0 0 20px rgba(0, 240, 255, 0.2);
+  --cyber-glow-magenta: 0 0 10px rgba(255, 0, 127, 0.5), 0 0 20px rgba(255, 0, 127, 0.2);
+  --cyber-glow-green: 0 0 10px rgba(57, 255, 20, 0.5), 0 0 20px rgba(57, 255, 20, 0.2);
+  --font-cyber: 'Orbitron', sans-serif;
+  --font-mono: 'Share Tech Mono', monospace;
+  --font-sans: 'Inter', sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-cyan) var(--bg-secondary);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-cyan);
+  border-radius: 3px;
+  box-shadow: var(--cyber-glow-cyan);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-magenta);
+  box-shadow: var(--cyber-glow-magenta);
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+  position: relative;
+  min-height: 100vh;
+}
+
+/* CRT Scanlines Overlay */
+body::before {
+  content: " ";
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+  z-index: 99999;
+  background-size: 100% 4px, 6px 100%;
+  pointer-events: none;
+  opacity: 0.15;
+}
+
+/* Matrix/Cyber grid backing */
+.cyber-grid {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+  background-position: center;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.cyber-grid::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 50% 50%, transparent 20%, var(--bg-primary) 85%);
+  pointer-events: none;
+}
+
+/* Typography & Headers */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-cyber);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+p {
+  line-height: 1.6;
+}
+
+/* Cyber Utilities */
+.cyber-panel {
+  background: rgba(10, 11, 18, 0.7);
+  border: 1px solid var(--border-cyber);
+  border-left: 3px solid var(--color-cyan);
+  border-radius: 4px;
+  padding: 1.5rem;
+  backdrop-filter: blur(8px);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cyber-panel::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(0, 240, 255, 0.05) 0%, transparent 100%);
+  pointer-events: none;
+}
+
+.cyber-panel.magenta {
+  border-left-color: var(--color-magenta);
+}
+
+.cyber-panel.green {
+  border-left-color: var(--color-green);
+}
+
+.cyber-panel:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(0, 240, 255, 0.1);
+  border-color: rgba(0, 240, 255, 0.4);
+}
+
+.cyber-panel.magenta:hover {
+  box-shadow: 0 4px 20px rgba(255, 0, 127, 0.1);
+  border-color: rgba(255, 0, 127, 0.4);
+}
+
+/* Buttons */
+.cyber-btn {
+  background: transparent;
+  color: var(--color-text);
+  border: 1px solid var(--color-cyan);
+  padding: 0.75rem 1.5rem;
+  font-family: var(--font-cyber);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.2s ease-in-out;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.cyber-btn::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.2), transparent);
+  transition: 0.5s;
+}
+
+.cyber-btn:hover::after {
+  left: 100%;
+}
+
+.cyber-btn:hover {
+  background: rgba(0, 240, 255, 0.1);
+  box-shadow: var(--cyber-glow-cyan);
+  text-shadow: 0 0 5px rgba(0, 240, 255, 0.5);
+}
+
+.cyber-btn.magenta {
+  border-color: var(--color-magenta);
+}
+
+.cyber-btn.magenta:hover {
+  background: rgba(255, 0, 127, 0.1);
+  box-shadow: var(--cyber-glow-magenta);
+  text-shadow: 0 0 5px rgba(255, 0, 127, 0.5);
+}
+
+.cyber-btn.green {
+  border-color: var(--color-green);
+}
+
+.cyber-btn.green:hover {
+  background: rgba(57, 255, 20, 0.1);
+  box-shadow: var(--cyber-glow-green);
+  text-shadow: 0 0 5px rgba(57, 255, 20, 0.5);
+}
+
+/* Cyber text effects */
+.text-cyan {
+  color: var(--color-cyan);
+  text-shadow: 0 0 5px rgba(0, 240, 255, 0.3);
+}
+
+.text-magenta {
+  color: var(--color-magenta);
+  text-shadow: 0 0 5px rgba(255, 0, 127, 0.3);
+}
+
+.text-green {
+  color: var(--color-green);
+  text-shadow: 0 0 5px rgba(57, 255, 20, 0.3);
+}
+
+.glitch-text {
+  position: relative;
+}
+
+.glitch-text::before,
+.glitch-text::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--bg-primary);
+}
+
+.glitch-text::before {
+  left: 2px;
+  text-shadow: -1px 0 var(--color-magenta);
+  clip: rect(44px, 450px, 56px, 0);
+  animation: glitch-anim 5s infinite linear alternate-reverse;
+}
+
+.glitch-text::after {
+  left: -2px;
+  text-shadow: -1px 0 var(--color-cyan);
+  clip: rect(85px, 450px, 140px, 0);
+  animation: glitch-anim2 5s infinite linear alternate-reverse;
+}
+
+/* Animations */
+@keyframes glitch-anim {
+  0% { clip: rect(15px, 9999px, 66px, 0); }
+  10% { clip: rect(34px, 9999px, 5px, 0); }
+  20% { clip: rect(81px, 9999px, 28px, 0); }
+  30% { clip: rect(12px, 9999px, 92px, 0); }
+  40% { clip: rect(67px, 9999px, 45px, 0); }
+  50% { clip: rect(40px, 9999px, 80px, 0); }
+  60% { clip: rect(100px, 9999px, 20px, 0); }
+  70% { clip: rect(5px, 9999px, 60px, 0); }
+  80% { clip: rect(85px, 9999px, 110px, 0); }
+  90% { clip: rect(15px, 9999px, 75px, 0); }
+  100% { clip: rect(50px, 9999px, 90px, 0); }
+}
+
+@keyframes glitch-anim2 {
+  0% { clip: rect(80px, 9999px, 5px, 0); }
+  10% { clip: rect(45px, 9999px, 90px, 0); }
+  20% { clip: rect(12px, 9999px, 30px, 0); }
+  30% { clip: rect(67px, 9999px, 100px, 0); }
+  40% { clip: rect(20px, 9999px, 55px, 0); }
+  50% { clip: rect(95px, 9999px, 15px, 0); }
+  60% { clip: rect(10px, 9999px, 85px, 0); }
+  70% { clip: rect(75px, 9999px, 40px, 0); }
+  80% { clip: rect(30px, 9999px, 70px, 0); }
+  90% { clip: rect(90px, 9999px, 120px, 0); }
+  100% { clip: rect(5px, 9999px, 65px, 0); }
+}
+
+/* Corner clip indicators (cyber aesthetic) */
+.corner-clip {
+  clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+}
+
+.corner-decor::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 12px;
+  height: 12px;
+  background: var(--color-cyan);
+  clip-path: polygon(100% 0, 100% 100%, 0 100%);
+  pointer-events: none;
+}
+
+.corner-decor.magenta::after {
+  background: var(--color-magenta);
+}
+
+.corner-decor.green::after {
+  background: var(--color-green);
+}
